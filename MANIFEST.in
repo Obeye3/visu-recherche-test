@@ -1,0 +1,7 @@
+include RIGHTS.md CONTRIBUTING.md
+recursive-include docs *.md
+recursive-include tests *.py
+recursive-include scripts *.py
+exclude docs/migration-manifest.csv
+prune docs/history
+prune docs/reports/local

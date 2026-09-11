@@ -1,0 +1,39 @@
+name: Vérifications Python
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.11', '3.13']
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - name: Installer
+        run: python -m pip install -e ".[dev]"
+      - name: Vérifier les dépendances
+        run: python -m pip check
+      - name: Vérifier le style
+        run: python -m ruff check src tests scripts
+      - name: Vérifier le formatage
+        run: python -m ruff format --check src tests scripts
+      - name: Tester
+        run: python -m pytest
+      - name: Construire le paquet
+        run: python -m build
+      - name: Vérifier les fichiers du dépôt
+        run: python scripts/check_repository.py

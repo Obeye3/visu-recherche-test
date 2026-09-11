@@ -1,0 +1,29 @@
+# Python et environnements locaux
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Configuration personnelle et secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Corpus, publications téléchargées et sorties de calcul
+/data/local/
+/results/
+/.visu-recherche/
+/docs/reports/local/
